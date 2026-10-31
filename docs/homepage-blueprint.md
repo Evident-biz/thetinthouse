@@ -65,3 +65,10 @@ GHL workflows to set up:
 Site also uses: GHL text-us / chat widget (optional), GHL reviews widget or a Google reviews feed.
 
 Ask owner: sub-account admin access for us, is the shop number on LC Phone, A2P 10DLC status, who set up GHL (agency?), existing workflows to keep.
+
+## GHL status (as of Oct 31, 2026)
+
+- Owner set up GHL himself. No existing automations or texting.
+- Access: owner will add us as an admin user (preferred over sharing his login).
+- Phone: unknown. Check Settings > Phone Numbers in the sub-account. Decide port vs forward once we know what the shop number is (carrier line, VoIP, or personal cell).
+- A2P 10DLC: not registered. Needs legal business name + EIN exactly as on IRS records, business address, website with privacy policy, SMS terms, and opt-in language on the form. Start as soon as a GHL number exists.
