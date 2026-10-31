@@ -38,7 +38,7 @@ Rules:
 ## Owner decisions
 
 - No published prices. Every service and CTA drives to a phone call. No price-based quote builder; the shade preview (if built) shows looks and CA legality only.
-- Recommended: missed-call text-back (Twilio) so calls missed during installs get an instant text reply.
+- Recommended: missed-call text-back (GHL) so calls missed during installs get an instant text reply.
 - Track tap-to-call clicks as conversions (analytics event). Do not use a call-tracking number on the site; it breaks phone number consistency with Google.
 
 ## Other pages (Green Valley has these too)
@@ -47,13 +47,21 @@ About, Services (one page per service), Reviews, Blog, Contact, Get a Quote, Car
 
 ## Quote / callback request (hero form + Get a Quote page)
 
+Owner uses GoHighLevel (GHL). All leads, texting, and follow-up run through GHL. No Twilio. Supabase is only for the site admin (photos, hours, banner).
+
 Fields: name, phone, "What are we tinting?" (car/truck/SUV, home, business), year/make/model (only if vehicle), "How should we reach you?" (call me / text me a quote), best time (optional), photo (optional), SMS consent checkbox.
 
-Flow:
-1. Customer submits. Page says: "Got it. We'll call or text you back within 2 business hours." After hours: "We're closed right now. We'll reach out first thing [next open day] morning."
-2. Customer gets an instant confirmation text (if consented).
-3. Owner gets a text with the lead details and a tap-to-call link.
-4. If the lead isn't marked handled in the admin within 2 business hours, owner gets a reminder text.
-5. Leads list in the phone admin: new / contacted / booked / lost.
+Form delivery: custom-styled form on our site posts to a GHL workflow Inbound Webhook (or GHL API v2 contact create via private integration token). Fallback: embed the GHL form (this is what Green Valley does), styled as close as possible.
 
-Requirements: Twilio A2P 10DLC registration before launch (takes days to weeks, start early). Leads stored in Supabase with row-level security. Promise window must match owner's real response time.
+GHL workflows to set up:
+1. Form submitted: create/update contact, tag "website lead", create opportunity in pipeline (New > Contacted > Quoted > Booked > Won/Lost).
+2. Instant confirmation text to customer: "Got it. We'll call or text you back within [X] business hours." After-hours version names the next open day.
+3. Internal notification to owner (text + LeadConnector app push).
+4. Reminder to owner if opportunity still "New" after [X] business hours.
+5. Missed call text-back (requires business number on LC Phone or forwarded through it).
+6. Quote follow-up: if "Quoted" and not booked after 2 days, one friendly follow-up text.
+7. Review request: when moved to "Won", text a Google review link (biggest long-term win).
+
+Site also uses: GHL text-us / chat widget (optional), GHL reviews widget or a Google reviews feed.
+
+Ask owner: sub-account admin access for us, is the shop number on LC Phone, A2P 10DLC status, who set up GHL (agency?), existing workflows to keep.
