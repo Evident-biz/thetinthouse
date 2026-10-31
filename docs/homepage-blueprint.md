@@ -44,3 +44,16 @@ Rules:
 ## Other pages (Green Valley has these too)
 
 About, Services (one page per service), Reviews, Blog, Contact, Get a Quote, Careers, Privacy, Terms, Cookie Policy. Add for us: CA tint law page, city pages (Modesto, Turlock, Tracy, Manteca, Newman).
+
+## Quote / callback request (hero form + Get a Quote page)
+
+Fields: name, phone, "What are we tinting?" (car/truck/SUV, home, business), year/make/model (only if vehicle), "How should we reach you?" (call me / text me a quote), best time (optional), photo (optional), SMS consent checkbox.
+
+Flow:
+1. Customer submits. Page says: "Got it. We'll call or text you back within 2 business hours." After hours: "We're closed right now. We'll reach out first thing [next open day] morning."
+2. Customer gets an instant confirmation text (if consented).
+3. Owner gets a text with the lead details and a tap-to-call link.
+4. If the lead isn't marked handled in the admin within 2 business hours, owner gets a reminder text.
+5. Leads list in the phone admin: new / contacted / booked / lost.
+
+Requirements: Twilio A2P 10DLC registration before launch (takes days to weeks, start early). Leads stored in Supabase with row-level security. Promise window must match owner's real response time.
