@@ -16,7 +16,7 @@ Rules:
 | 3 | Hero (green band) | Left: animated headline "Get A Quote Today" + quote form (first, last, phone, email, service type, message, SMS consent). Right: YouTube video in rounded white frame. Mobile: intro paragraph above form | Same layout. Upgrade: add a real headline ("Window tint in Patterson, CA"), "5.0★ 230+ Google reviews", shorter form (name, phone, service, optional photo). Right side: Tint House install video | 15-30s video, which phone gets leads |
 | 4 | Reviews | "What Our Clients Are Saying" + Trustindex Google widget (4.9, 2,358 reviews, carousel with names and dates) | Same: live Google reviews carousel | Google Business Profile manager access |
 | 5 | Financing | "Now Offering" + Affirm banner + full Affirm disclosure | Same, but disclosure as a link or collapsed text | Affirm merchant details |
-| 6 | Services | Animated headline + flip-box carousel, 8 cards (front: title, back: blurb + Read More) | Same flip-box carousel. Put a "from $X" price on each card back | Price list, film brands |
+| 6 | Services | Animated headline + flip-box carousel, 8 cards (front: title, back: blurb + Read More) | Same flip-box carousel. No prices (owner decision): card back ends with "Call for a free quote" tap-to-call | Film brands |
 | 7 | About Us | Image + mission text + "Our Commitment to Excellence" (Since 1983) + "Empowering Our Teams" icon boxes | Garage-to-shop story, owner + crew photo, crew first names | Story, year opened, team photo |
 | 8 | CTA band | "Transform Your Space..." text + button + image | Same, with real Tint House photo | Photos |
 | 9 | Benefits | "Enhance Aesthetics & Value" + info circle: Energy Efficiency, UV Protection, Privacy & Security, Expert Installation | Same 4 benefits; add CA tint law note (front side windows 70%) | None |
@@ -30,10 +30,16 @@ Rules:
 1. A headline in the hero that says what and where (Green Valley's hero has none).
 2. Review count and Best of 209 in the first screen.
 3. Shorter quote form plus text-a-photo option.
-4. Starting prices on service cards.
+4. Sticky tap-to-call bar on mobile ("Call for a free quote").
 5. Real photos only, no stock (Green Valley repeats one stock photo twice).
 6. Fast custom build instead of Elementor; body text 16px+, no 13px text.
-7. Phone-first admin (Supabase) for photos, prices, hours, announcement banner.
+7. Phone-first admin (Supabase) for photos, hours, announcement banner.
+
+## Owner decisions
+
+- No published prices. Every service and CTA drives to a phone call. No price-based quote builder; the shade preview (if built) shows looks and CA legality only.
+- Recommended: missed-call text-back (Twilio) so calls missed during installs get an instant text reply.
+- Track tap-to-call clicks as conversions (analytics event). Do not use a call-tracking number on the site; it breaks phone number consistency with Google.
 
 ## Other pages (Green Valley has these too)
 
