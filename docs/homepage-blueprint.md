@@ -38,28 +38,31 @@ Rules:
 ## Owner decisions
 
 - No published prices. Every service and CTA drives to a phone call. No price-based quote builder; the shade preview (if built) shows looks and CA legality only.
-- Recommended: missed-call text-back (Twilio) so calls missed during installs get an instant text reply.
 - Track tap-to-call clicks as conversions (analytics event). Do not use a call-tracking number on the site; it breaks phone number consistency with Google.
 
 ## Other pages (Green Valley has these too)
 
 About, Services (one page per service), Reviews, Blog, Contact, Get a Quote, Careers, Privacy, Terms, Cookie Policy. Add for us: CA tint law page, city pages (Modesto, Turlock, Tracy, Manteca, Newman).
 
-## Quote / callback request (hero form + Get a Quote page)
+## Lead handling (owner: Allan)
 
-Owner stopped using GoHighLevel because of cost. Plan: build lead handling into our own stack (Supabase + Twilio pay-as-you-go + Resend email), managed by Evident. Target running cost: roughly $10-20/month in usage fees. Verify current Twilio pricing and A2P fees before quoting the owner.
+Current reality (from owner, Oct 31 2026): leads come mainly from social media and phone calls. Dedicated shop cell phone. Wix forms handle website leads. Stopped GoHighLevel because AI actions/service got too expensive per day. Wants no prices listed: "Call to get a quote or fill out a form."
 
-Fields: name, phone, "What are we tinting?" (car/truck/SUV, home, business), year/make/model (only if vehicle), "How should we reach you?" (call me / text me a quote), best time (optional), photo (optional), SMS consent checkbox.
+Plan: zero new monthly tools at launch. No Twilio, no GHL, no SMS registration needed.
 
-Flow:
+Contact options on every page (sticky on mobile):
+- Call (tel: link to shop cell)
+- Text (sms: link to shop cell, prefilled "Hi! I'd like a quote for my ___")
+- Request a quote (form)
+- Message on Instagram / Facebook
+
+Quote form fields: name, phone, "What are we tinting?" (car/truck/SUV, home, business), year/make/model (only if vehicle), "How should we reach you?" (call / text), best time (optional), photo (optional).
+
+Form flow:
 1. Customer submits. Page says: "Got it. We'll call or text you back within [X] business hours." After-hours version names the next open day.
-2. Lead saved in Supabase. Instant confirmation text to customer (Twilio, after A2P approval).
-3. Owner alerted by text + email (Resend), with tap-to-call link.
-4. Reminder to owner if still "New" after [X] business hours.
-5. Leads tab in phone admin: New > Contacted > Quoted > Booked > Won/Lost.
-6. "Job done" button sends customer a Google review request text.
-7. Missed-call text-back: shop number forwarded to (or ported into) a Twilio number; unanswered calls trigger an auto-text.
+2. Lead saved in Supabase.
+3. Owner alerted by email (Resend) and push notification from the admin app on the shop phone (web push works on iPhone when the admin is added to the home screen).
+4. Owner replies from the shop cell like today. Leads tab: New > Contacted > Booked > Lost, with tap-to-call and tap-to-text.
+5. "Job done" button opens the shop phone's own Messages app with a prefilled Google review request. Sent from the shop cell, free, no registration.
 
-Until A2P approval: email + admin notifications only.
-
-Alternative if owner wants an off-the-shelf phone app: business phone service with built-in missed-call auto-reply and shared texting inbox (e.g. OpenPhone), roughly $15-25/user/month. Check current pricing.
+Later (only if owner wants): missed-call text-back. Hard to do on a regular cell without changing the shop number or texting from a different number; revisit after launch.
