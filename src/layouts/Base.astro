@@ -1,0 +1,223 @@
+---
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo-192.png';
+import { site, nav, services, cities } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+const { title, description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const path = Astro.url.pathname;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: site.name,
+  description: 'Window tint and window film for cars, homes and businesses in Patterson, CA.',
+  url: site.url,
+  telephone: site.phone,
+  image: new URL('/favicon.png', site.url).href,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.zip,
+    addressCountry: 'US',
+  },
+  openingHours: site.openingHours,
+  areaServed: site.serviceArea.map((c) => ({ '@type': 'City', name: `${c}, CA` })),
+  sameAs: [site.instagram, site.facebook],
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: site.rating.value, reviewCount: site.rating.count },
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="theme-color" content="#0b0b0b" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="topbar">
+    <div class="wrap topbar__inner">
+      <a href={site.phoneHref}>📞 {site.phone}</a>
+      <a href={site.mapsUrl} target="_blank" rel="noopener" class="hide-sm">📍 {site.address.street}, {site.address.city}</a>
+      <a href={site.instagram} target="_blank" rel="noopener" class="hide-sm">Instagram @thetinthouse_209</a>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="wrap header__inner">
+      <a href="/" class="brand" aria-label="The Tint House home">
+        <Image src={logo} alt="" width={56} height={56} loading="eager" />
+        <span class="brand__text"><strong>The Tint House</strong><small>Window Film Specialist</small></span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <ul>
+          {nav.map((item) => (
+            <li class={item.children ? 'has-sub' : ''}>
+              <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+              {item.children && (
+                <ul class="sub">
+                  {item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <a href="/contact/#quote" class="btn btn--orange header__cta">Get a Free Quote</a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" hidden aria-label="Mobile">
+      <a href="/">Home</a>
+      <a href="/about/">About Us</a>
+      {services.filter((s) => !s.anchor).map((s) => <a href={`/${s.slug}/`}>{s.title}</a>)}
+      <a href="/reviews/">Reviews</a>
+      <a href="/california-tint-law/">CA Tint Law</a>
+      <a href="/blog/">Blog</a>
+      <a href="/contact/">Contact</a>
+      <a href="/contact/#quote" class="btn btn--orange">Get a Free Quote</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <a href="/" class="brand brand--footer">
+          <Image src={logo} alt="The Tint House logo" width={72} height={72} />
+        </a>
+        <p>Window tint and window film for cars, homes and businesses. Patterson, CA, serving the 209.</p>
+        <p class="footer__awards">🏆 {site.awards.join(' · ')}</p>
+        <p><a href={site.instagram} target="_blank" rel="noopener">Instagram</a> · <a href={site.facebook} target="_blank" rel="noopener">Facebook</a> · <a href={site.reviewsUrl} target="_blank" rel="noopener">Google Reviews</a></p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/reviews/">Reviews</a></li>
+          <li><a href="/california-tint-law/">California Tint Law</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/contact/#quote">Get a Free Quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our Services</h4>
+        <ul>
+          {services.map((s) => <li><a href={`/${s.slug}/${s.anchor ?? ''}`}>{s.title}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h4>Visit Us</h4>
+        <p><a href={site.mapsUrl} target="_blank" rel="noopener">{site.address.street}<br />{site.address.city}, {site.address.region} {site.address.zip}</a></p>
+        <p><a href={site.phoneHref}>{site.phone}</a></p>
+        {site.hours.map((h) => <p class="footer__hours"><strong>{h.days}</strong><br />{h.time}</p>)}
+        <p class="footer__hours">Walk-ins welcome.</p>
+      </div>
+    </div>
+    <div class="wrap footer__areas">
+      <strong>Serving:</strong> Patterson · {cities.map((c, i) => <>{i > 0 && ' · '}<a href={`/window-tint-${c.slug}/`}>{c.name}</a></>)} · Crows Landing · Westley
+    </div>
+    <div class="wrap footer__legal">
+      <p class="footer__affirm">Financing available through Affirm. Rates from 0-36% APR. Payment options are subject to an eligibility check and are provided by these lending partners: <a href="https://www.affirm.com/lenders" target="_blank" rel="noopener">affirm.com/lenders</a>. CA residents: Loans by Affirm Loan Services, LLC are made or arranged pursuant to a California Financing Law license. <a href="https://www.affirm.com/licenses" target="_blank" rel="noopener">See Affirm disclosures</a>.</p>
+      <p><a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a> · © {new Date().getFullYear()} The Tint House. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" role="navigation" aria-label="Contact shortcuts">
+    <a href={site.phoneHref} class="sticky-cta__call">Call</a>
+    <a href={site.smsHref}>Text</a>
+    <a href="/contact/#quote">Quote</a>
+  </div>
+
+  <script>
+    const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
+    const menu = document.getElementById('mobile-nav');
+    btn?.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.textContent = open ? 'Menu' : 'Close';
+      if (menu) menu.hidden = open;
+    });
+  </script>
+</body>
+</html>
+
+<style>
+  .topbar { background: var(--orange); color: var(--black); font-weight: 600; font-size: 1rem; }
+  .topbar__inner { display: flex; justify-content: center; gap: 28px; padding: 9px 0; }
+  .topbar a { text-decoration: none; }
+  .topbar a:hover { text-decoration: underline; }
+  @media (max-width: 899px) { .hide-sm { display: none; } }
+
+  .header { background: var(--black); color: var(--white); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid #222; }
+  .header__inner { display: flex; align-items: center; gap: 24px; min-height: 84px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand img { border-radius: 50%; }
+  .brand__text { display: flex; flex-direction: column; line-height: 1; }
+  .brand__text strong { font-family: var(--display); font-size: 1.6rem; text-transform: uppercase; letter-spacing: .02em; }
+  .brand__text small { font-size: .85rem; color: var(--orange); margin-top: 4px; font-weight: 600; }
+
+  .nav { margin-left: auto; }
+  .nav > ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .nav a { display: block; padding: 10px 12px; text-decoration: none; font-weight: 600; font-size: 1.05rem; border-radius: 999px; }
+  .nav a:hover, .nav a[aria-current='page'] { color: var(--orange); }
+  .has-sub { position: relative; }
+  .sub { display: none; position: absolute; top: 100%; left: 0; background: var(--charcoal); list-style: none; margin: 0; padding: 8px; min-width: 260px; border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,.4); }
+  .has-sub:hover .sub, .has-sub:focus-within .sub { display: block; }
+  .header__cta { min-height: 48px; font-size: 1.1rem; padding: 0 22px; }
+  .menu-btn { display: none; margin-left: auto; background: none; color: var(--white); border: 2px solid #444; border-radius: 999px; padding: 10px 18px; font: 600 1rem var(--body); }
+  .mobile-nav { display: flex; flex-direction: column; padding: 8px 16px 20px; gap: 2px; background: var(--black); max-height: calc(100dvh - 84px); overflow-y: auto; }
+  .mobile-nav[hidden] { display: none; }
+  .mobile-nav a:not(.btn) { padding: 12px 4px; text-decoration: none; font-weight: 600; font-size: 1.15rem; border-bottom: 1px solid #222; }
+  .mobile-nav .btn { margin-top: 14px; }
+  @media (max-width: 1150px) {
+    .nav, .header__cta { display: none; }
+    .menu-btn { display: block; }
+  }
+  @media (max-width: 480px) { .brand__text strong { font-size: 1.35rem; } }
+
+  .footer { background: var(--black); color: #cfcfcf; padding: 64px 0 24px; font-size: 1rem; }
+  .footer__grid { display: grid; gap: 36px; grid-template-columns: 1fr; }
+  @media (min-width: 800px) { .footer__grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+  .footer h4 { color: var(--white); font-size: 1.4rem; margin-bottom: 14px; }
+  .footer ul { list-style: none; padding: 0; margin: 0; }
+  .footer li { margin-bottom: 8px; }
+  .footer a { text-decoration: none; }
+  .footer a:hover { color: var(--orange); }
+  .footer__awards { color: var(--orange); font-weight: 600; }
+  .footer__hours { margin-bottom: 10px; }
+  .footer__areas { border-top: 1px solid #262626; margin-top: 40px; padding-top: 20px; }
+  .footer__legal { margin-top: 20px; font-size: .9rem; color: #9a9a9a; }
+  .footer__affirm { max-width: 900px; }
+  .footer__legal a { text-decoration: underline; }
+
+  .sticky-cta { display: none; }
+  @media (max-width: 899px) {
+    .sticky-cta { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 8px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(11,11,11,.96); }
+    .sticky-cta a { display: flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 999px; text-decoration: none; font: 700 1.2rem var(--display); text-transform: uppercase; color: var(--white); border: 2px solid #444; }
+    .sticky-cta .sticky-cta__call { background: var(--orange); color: var(--black); border-color: var(--orange); }
+  }
+</style>

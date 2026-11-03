@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, reviews } from '../data/site';
+---
+<Base title={`Reviews | ${site.rating.value} Stars on Google | The Tint House Patterson`} description={`See why customers rate The Tint House ${site.rating.value} stars across ${site.rating.count} Google reviews. Window tint in Patterson, CA.`}>
+  <PageHero eyebrow="Reviews" title={`<span class="accent">${site.rating.value} ★</span> on Google`} lead={`${site.rating.count} reviews from drivers, homeowners and businesses around the 209.`} cta={false}>
+    <div class="btn-row">
+      <a class="btn btn--orange" href={site.reviewsUrl} target="_blank" rel="noopener">Read All Reviews on Google</a>
+      <a class="btn btn--ghost" href={site.writeReviewUrl} target="_blank" rel="noopener">Leave a Review</a>
+    </div>
+  </PageHero>
+  <section class="section section--cream">
+    <div class="wrap grid">
+      {reviews.map((r) => (
+        <figure class="review">
+          <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <blockquote>"{r.text}"</blockquote>
+          <figcaption>{r.name} <span>· Google review</span></figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+  <CtaBand />
+</Base>
+<style>
+  .grid { columns: 3 320px; column-gap: 20px; }
+  .review { break-inside: avoid; margin: 0 0 20px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 26px; }
+  .review blockquote { margin: 10px 0 14px; }
+  .review figcaption { font-weight: 700; }
+  .review figcaption span { font-weight: 400; color: var(--gray-500); }
+</style>

@@ -1,0 +1,19 @@
+---
+import { site } from '../data/site';
+interface Props { eyebrow?: string; title: string; lead?: string; cta?: boolean }
+const { eyebrow, title, lead, cta = true } = Astro.props;
+---
+<section class="page-hero">
+  <div class="wrap">
+    {eyebrow && <p class="eyebrow-line">{eyebrow}</p>}
+    <h1 set:html={title} />
+    {lead && <p class="lead">{lead}</p>}
+    {cta && (
+      <div class="btn-row">
+        <a class="btn btn--orange" href={site.phoneHref}>Call {site.phone}</a>
+        <a class="btn btn--ghost" href="/contact/#quote">Request a Free Quote</a>
+      </div>
+    )}
+    <slot />
+  </div>
+</section>

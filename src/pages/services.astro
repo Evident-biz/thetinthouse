@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Stock from '../components/Stock.astro';
+import { services } from '../data/site';
+---
+<Base title="Window Tint & Film Services | The Tint House | Patterson, CA" description="Automotive window tint, windshield film, home and commercial window film, privacy film and vinyl decals in Patterson, CA.">
+  <PageHero eyebrow="Services" title='What We <span class="accent">Do</span>' lead="Window tint and film for cars, homes and businesses across the 209." />
+  <section class="section">
+    <div class="wrap cards">
+      {services.map((s) => (
+        <a class="card" href={`/${s.slug}/${s.anchor ?? ''}`}>
+          <div class="card__img"><Stock name={s.image} alt="" width={600} /></div>
+          <div class="card__body">
+            <h2>{s.title}</h2>
+            <p>{s.short}</p>
+            <span class="card__more">Learn more →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+  <CtaBand />
+</Base>
+<style>
+  .cards { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .card { border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; text-decoration: none; display: flex; flex-direction: column; transition: border-color .15s, transform .15s; }
+  .card:hover { border-color: var(--orange); transform: translateY(-3px); }
+  .card__img { aspect-ratio: 3 / 2; }
+  .card__img :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .card__body { padding: 24px; }
+  .card h2 { font-size: 1.9rem; }
+  .card__more { color: var(--orange-dark); font-weight: 700; }
+</style>

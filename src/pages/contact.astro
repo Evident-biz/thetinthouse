@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { site } from '../data/site';
+---
+<Base title="Contact & Free Quote | The Tint House | Patterson, CA" description={`Call ${site.phone}, text us, or request a free window tint quote online. 100 W Las Palmas Ave, Patterson, CA. Open Tuesday to Saturday.`}>
+  <section class="contact">
+    <div class="wrap contact__grid">
+      <div>
+        <p class="eyebrow-line">Contact Us</p>
+        <h1>Get a <span class="accent">Free Quote</span></h1>
+        <p class="lead">Call, text or send a request. No prices online because every vehicle and window is different, but we'll get you an exact quote fast.</p>
+        <div class="ways">
+          <a class="way" href={site.phoneHref}><strong>Call</strong><span>{site.phone}</span></a>
+          <a class="way" href={site.smsHref}><strong>Text</strong><span>{site.phone}</span></a>
+          <a class="way" href={site.instagram} target="_blank" rel="noopener"><strong>Instagram</strong><span>@thetinthouse_209</span></a>
+          <a class="way" href={site.facebook} target="_blank" rel="noopener"><strong>Facebook</strong><span>The Tint House</span></a>
+        </div>
+        <div class="visit">
+          <h2>Visit the Shop</h2>
+          <p><a href={site.mapsUrl} target="_blank" rel="noopener">{site.address.street}, {site.address.city}, {site.address.region} {site.address.zip}</a></p>
+          {site.hours.map((h) => <p><strong>{h.days}:</strong> {h.time}</p>)}
+          <p>Walk-ins welcome.</p>
+        </div>
+      </div>
+      <div>
+        <h2 class="formtitle">Request a Call or Quote</h2>
+        <QuoteForm id="quote" />
+      </div>
+    </div>
+  </section>
+  <section class="map">
+    <iframe title="Map to The Tint House" src={site.mapEmbed} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </section>
+</Base>
+<style>
+  .contact { background: var(--black); color: var(--white); padding: clamp(48px, 7vw, 90px) 0; }
+  .contact__grid { display: grid; gap: clamp(32px, 5vw, 64px); grid-template-columns: 1fr; }
+  @media (min-width: 960px) { .contact__grid { grid-template-columns: 1fr 1fr; } }
+  .contact .lead { color: #d6d6d6; }
+  .ways { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0; }
+  .way { display: grid; gap: 2px; padding: 16px 18px; border: 2px solid #333; border-radius: 14px; text-decoration: none; }
+  .way:hover { border-color: var(--orange); }
+  .way strong { font: 700 1.4rem var(--display); text-transform: uppercase; color: var(--orange); }
+  .visit h2 { font-size: 2rem; }
+  .visit p { margin-bottom: 6px; color: #d6d6d6; }
+  .formtitle { font-size: clamp(1.8rem, 3vw, 2.4rem); scroll-margin-top: 110px; }
+  #quote { scroll-margin-top: 110px; }
+  .map iframe { width: 100%; height: 380px; border: 0; display: block; }
+</style>

@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ReviewCarousel from '../components/ReviewCarousel.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, cities, services } from '../data/site';
+
+export function getStaticPaths() {
+  return cities.map((c) => ({ params: { city: c.slug }, props: { city: c } }));
+}
+const { city } = Astro.props;
+---
+<Base
+  title={`Window Tint ${city.name}, CA | The Tint House | Ceramic Tint Near ${city.name}`}
+  description={`Window tint for ${city.name} drivers and homeowners. 5-star shop in Patterson, ${city.drive} away. Ceramic car tint, home and business film. Call ${site.phone}.`}
+>
+  <PageHero eyebrow={`Serving ${city.name}`} title={`Window Tint for <span class="accent">${city.name}</span>`} lead={`${city.note} Our shop in Patterson is ${city.drive} from ${city.name}.`} />
+
+  <section class="section">
+    <div class="wrap grid-2">
+      <div class="prose">
+        <h2>Why {city.name} Drivers <span class="accent">Choose Us</span></h2>
+        <hr class="rule" />
+        <ul>
+          <li><strong>{site.rating.value} stars across {site.rating.count} Google reviews</strong> and Best of 209 in 2024 and 2025.</li>
+          <li><strong>Most cars done in 2 to 3 hours</strong>, so one trip is all it takes.</li>
+          <li><strong>Honest advice on California tint law.</strong> We'll tell you what's legal on every window.</li>
+          <li><strong>Warranty on every install.</strong></li>
+          <li><strong>Home and business film</strong> installed on site in {city.name}. Ask about scheduling.</li>
+        </ul>
+      </div>
+      <div class="visit">
+        <h3>Getting Here from {city.name}</h3>
+        <p>{site.address.street}<br />{site.address.city}, {site.address.region} {site.address.zip}</p>
+        <p>{city.drive} drive</p>
+        {site.hours.map((h) => <p><strong>{h.days}:</strong> {h.time}</p>)}
+        <a class="btn btn--orange" href={site.mapsUrl} target="_blank" rel="noopener">Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <h2>Services for <span class="accent">{city.name}</span></h2>
+      <hr class="rule" />
+      <ul class="svc">
+        {services.map((s) => <li><a href={`/${s.slug}/${s.anchor ?? ''}`}>{s.title}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap"><ReviewCarousel light /></div>
+  </section>
+
+  <CtaBand title={`Free Quote for ${city.name}`} />
+</Base>
+<style>
+  .visit { background: var(--black); color: var(--white); border-radius: var(--radius); padding: 30px; }
+  .visit h3 { color: var(--orange); }
+  .visit p { color: #d6d6d6; margin-bottom: 8px; }
+  .visit .btn { margin-top: 12px; }
+  .svc { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); list-style: none; padding: 0; }
+  .svc a { display: block; padding: 16px 20px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; text-decoration: none; font-weight: 700; }
+  .svc a:hover { border-color: var(--orange); }
+</style>

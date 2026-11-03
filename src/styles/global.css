@@ -1,0 +1,110 @@
+@import '@fontsource/barlow/400.css';
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/600.css';
+@import '@fontsource/barlow-condensed/600.css';
+@import '@fontsource/barlow-condensed/700.css';
+@import '@fontsource/barlow-condensed/800.css';
+
+:root {
+  --orange: #ff8603;
+  --orange-dark: #e07300;
+  --black: #0b0b0b;
+  --ink: #141414;
+  --charcoal: #1c1c1c;
+  --gray-700: #3d3d3d;
+  --gray-500: #6b6b6b;
+  --gray-200: #e6e3df;
+  --cream: #faf7f2;
+  --white: #ffffff;
+  --radius: 14px;
+  --wrap: 1200px;
+  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body: 'Barlow', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--white);
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  margin: 0 0 0.5em;
+}
+h1 { font-size: clamp(2.8rem, 7vw, 5.4rem); }
+h2 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
+h3 { font-size: clamp(1.5rem, 2.4vw, 1.9rem); font-weight: 700; }
+p { margin: 0 0 1em; }
+
+.wrap { width: min(var(--wrap), 100% - 32px); margin-inline: auto; }
+.section { padding: clamp(56px, 9vw, 110px) 0; }
+.section--dark { background: var(--black); color: var(--white); }
+.section--charcoal { background: var(--charcoal); color: var(--white); }
+.section--cream { background: var(--cream); }
+.section--orange { background: var(--orange); color: var(--black); }
+
+.accent { color: var(--orange); }
+.rule {
+  width: 84px; height: 4px; background: var(--orange); border: 0;
+  margin: 0 0 28px;
+}
+.center { text-align: center; }
+.center .rule { margin-inline: auto; }
+.lead { font-size: clamp(1.1rem, 1.6vw, 1.3rem); max-width: 60ch; }
+.center .lead { margin-inline: auto; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 54px; padding: 0 28px;
+  font-family: var(--display); font-weight: 700; font-size: 1.25rem;
+  text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none;
+  border-radius: 999px; border: 2px solid transparent; cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s, transform .15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn--orange { background: var(--orange); color: var(--black); }
+.btn--orange:hover { background: var(--orange-dark); }
+.btn--ghost { border-color: currentColor; color: inherit; background: transparent; }
+.btn--ghost:hover { background: rgba(255,255,255,.08); }
+.btn--dark { background: var(--black); color: var(--white); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+.stars { color: var(--orange); letter-spacing: 2px; }
+
+.grid-2 { display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: 1fr; align-items: center; }
+@media (min-width: 900px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+.photo { border-radius: var(--radius); overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.prose { max-width: 72ch; }
+.prose h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); margin-top: 1.4em; }
+.prose h3 { margin-top: 1.2em; }
+.prose ul { padding-left: 1.2em; }
+.prose li { margin-bottom: .4em; }
+.prose table { width: 100%; border-collapse: collapse; margin: 1em 0 1.5em; font-size: 1rem; }
+.prose th, .prose td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+.prose th { font-family: var(--display); text-transform: uppercase; font-size: 1.05rem; background: var(--cream); }
+
+.page-hero { background: var(--black); color: var(--white); padding: clamp(56px, 9vw, 110px) 0 clamp(40px, 6vw, 72px); position: relative; overflow: hidden; }
+.page-hero p { color: #d6d6d6; }
+.eyebrow-line { font-weight: 600; color: var(--orange); margin-bottom: 10px; font-size: 1.05rem; }
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 16px; z-index: 100; background: var(--orange); color: var(--black); padding: 10px 16px; }
+
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+
+/* room for the sticky mobile bar */
+@media (max-width: 899px) { body { padding-bottom: 76px; } }

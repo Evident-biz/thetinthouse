@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ReviewCarousel from '../components/ReviewCarousel.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import Stock from '../components/Stock.astro';
+
+const faq = [
+  { q: 'Do you come to my house?', a: 'Yes. Home and business jobs are done on site. We measure, help you choose a film, and install at a time that works for you.' },
+  { q: 'Will window film make my house dark?', a: 'Not unless you want it to. Many heat-rejecting films are light or nearly clear, so you keep your view and natural light while cutting heat and glare.' },
+  { q: 'Does it really lower energy bills?', a: 'Film reduces how much solar heat comes through the glass, so your AC runs less on hot afternoons. Results depend on your windows, sun exposure and the film you choose. We will be honest about what to expect.' },
+  { q: 'Can I get privacy without curtains?', a: 'Yes. Mirror (reflective) film gives daytime privacy while you can still see out, and frosted or decorative film is great for bathrooms and front doors.' },
+  { q: 'Will it stop my floors and furniture from fading?', a: 'Quality window film blocks about 99% of UV rays, the biggest cause of fading. It slows fading a lot, though visible light and heat also play a role.' },
+];
+---
+<Base
+  title="Home Window Tinting Patterson, CA | Residential Window Film | The Tint House"
+  description="Home window film in Patterson and the 209. Cut heat and glare, block UV, add privacy. We come to you. Call (209) 695-7309 for a free quote."
+>
+  <PageHero eyebrow="Residential" title='Home <span class="accent">Window Film</span>' lead="Cooler rooms, less glare on the TV, floors and furniture protected from fading, and privacy when you want it. We come to your home." />
+
+  <section class="section">
+    <div class="wrap grid-2">
+      <div class="photo"><Stock name="living-room-window" alt="Bright living room with a large window" width={900} /></div>
+      <div>
+        <h2>Comfort You Can <span class="accent">Feel</span></h2>
+        <hr class="rule" />
+        <p class="lead">West-facing windows in the Valley turn rooms into ovens by late afternoon. Window film stops a big share of that heat at the glass.</p>
+        <ul class="checks">
+          <li>Cuts heat and hot spots near windows</li>
+          <li>Reduces glare on TVs and screens</li>
+          <li>Blocks about 99% of UV to slow fading</li>
+          <li>Light and clear options that keep your view</li>
+          <li>Installed at your home, on your schedule</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream" id="privacy">
+    <div class="wrap grid-2">
+      <div>
+        <h2>Privacy &amp; <span class="accent">Mirror Film</span></h2>
+        <hr class="rule" />
+        <p>Street-facing rooms, bathrooms, front doors and sliders. Mirror film gives you daytime privacy while you still see out. Frosted and decorative films let light in and keep eyes out, any time of day.</p>
+        <p>One of our customers put it best: "Allan offers genuine house calls and expertly applied beautiful mirror tint to two of my home windows."</p>
+        <a class="btn btn--orange" href="/contact/#quote">Get a Free Quote</a>
+      </div>
+      <div class="photo"><Stock name="living-room-glass-doors" alt="Living room with tall glass doors" width={900} /></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Safety &amp; <span class="accent">Security Film</span></h2>
+      <hr class="rule" />
+      <p class="lead">Safety film helps hold glass together if it breaks, from an accident, a ball through the window, or an attempted break-in. Ask us whether it fits your home.</p>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap"><ReviewCarousel light /></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Home Film <span class="accent">FAQ</span></h2>
+      <hr class="rule" />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand title="Get a Free Home Quote" text="Send a photo of your windows with a quote request, or give us a call. We'll set up a time to measure." />
+</Base>
+
+<style>
+  .photo { aspect-ratio: 4 / 3; }
+  .checks { list-style: none; padding: 0; }
+  .checks li { padding-left: 30px; position: relative; margin-bottom: 10px; }
+  .checks li::before { content: '✓'; position: absolute; left: 0; color: var(--orange); font-weight: 800; }
+</style>

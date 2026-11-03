@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Terms of Service | The Tint House" description="Terms for using The Tint House website.">
+  <section class="section">
+    <div class="wrap prose">
+      <h1>Terms of Service</h1>
+      <p><em>Last updated: November 2026</em></p>
+      <!-- TODO: have the owner review. Not legal advice. -->
+      <p>By using {site.url}, you agree to these terms.</p>
+      <h2>Quotes</h2>
+      <p>Quotes are estimates based on the information you provide and may change after we see your vehicle or windows. Final pricing is confirmed before work begins.</p>
+      <h2>Tint laws</h2>
+      <p>Information about California tint law on this site is general information, not legal advice. You are responsible for choosing shades that comply with the law for your vehicle.</p>
+      <h2>Text messages</h2>
+      <p>If you agree to receive texts, we'll only message you about your quote or service. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help.</p>
+      <h2>Warranty</h2>
+      <p>Warranty terms depend on the film installed and are provided with your service. Ask us for details.</p>
+      <h2>Financing</h2>
+      <p>Financing is provided by Affirm and its lending partners, subject to eligibility. See <a href="https://www.affirm.com/licenses" target="_blank" rel="noopener">Affirm disclosures</a>.</p>
+      <h2>Contact</h2>
+      <p><a href={site.phoneHref}>{site.phone}</a> · {site.address.street}, {site.address.city}, {site.address.region} {site.address.zip}</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ShadePreview from '../components/ShadePreview.astro';
+import ReviewCarousel from '../components/ReviewCarousel.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import Stock from '../components/Stock.astro';
+
+const faq = [
+  { q: 'How long does it take?', a: 'Most cars are done in about 2 to 3 hours. Trucks, SUVs and jobs that need old tint removed can take a little longer. Walk-ins are welcome, but calling ahead guarantees your spot.' },
+  { q: 'Ceramic or carbon, which should I get?', a: 'Both look great and block UV. Ceramic rejects much more heat, which matters in Valley summers, and it does not interfere with phone, GPS or radio signals. If comfort is the main goal, go ceramic. We will show you both on glass before you decide.' },
+  { q: 'How dark can I go in California?', a: 'Front side windows must let in at least 70% of light, counting the factory glass. Rear side windows and the back glass can be any darkness as long as you have dual side mirrors. The windshield can have a non-reflective strip across the top 4 inches. See our California tint law page for details.' },
+  { q: 'Can I roll my windows down right away?', a: 'Keep windows up for about 3 to 5 days so the film can cure. Small haze or water pockets right after install are normal and clear up as it dries.' },
+  { q: 'Do you remove old tint?', a: 'Yes. We remove old, purple or bubbling tint and clean the glass before installing new film.' },
+  { q: 'Is there a warranty?', a: 'Yes. Our installs come with a warranty against bubbling, peeling and fading. Ask us for the details on the film you choose.' },
+];
+---
+<Base
+  title="Car Window Tint Patterson, CA | Ceramic Tint | The Tint House"
+  description="Ceramic and carbon window tint for cars, trucks and SUVs in Patterson, CA. Most cars done in 2-3 hours, warranty included. Call (209) 695-7309 for a free quote."
+>
+  <PageHero eyebrow="Automotive" title='Car, Truck &amp; SUV <span class="accent">Window Tint</span>' lead="Cooler cabin, less glare, more privacy and a cleaner look. Ceramic and carbon films installed by a 5-star shop in Patterson." />
+
+  <section class="section">
+    <div class="wrap grid-2">
+      <div>
+        <h2>See the <span class="accent">Shades</span></h2>
+        <hr class="rule" />
+        <p class="lead">Tint is measured in VLT, the percent of light that gets through. A lower number is darker. Tap a shade to preview it.</p>
+        <p>Not sure what you want? Come by and we'll hold real samples up to your glass. Most people pick 35% or 20% for the rear and the legal 70% up front.</p>
+        <a class="btn btn--orange" href="/contact/#quote">Get a Free Quote</a>
+      </div>
+      <ShadePreview />
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap center">
+      <h2>Film <span class="accent">Options</span></h2>
+      <hr class="rule" />
+      <p class="lead">Every film blocks UV. The difference is how much heat it keeps out.</p>
+    </div>
+    <div class="wrap tiers">
+      <div class="tier">
+        <h3>Carbon</h3>
+        <p>A great-looking, fade-resistant film with solid heat reduction. A smart pick if you mostly want privacy and style.</p>
+        <ul><li>Blocks about 99% of UV</li><li>Matte, non-reflective finish</li><li>Won't fade purple</li></ul>
+      </div>
+      <div class="tier tier--best">
+        <span class="tier__tag">Most popular</span>
+        <h3>Ceramic</h3>
+        <p>Our go-to for the Central Valley. Ceramic particles reject far more infrared heat, so your car stays noticeably cooler.</p>
+        <ul><li>Much higher heat rejection</li><li>Blocks about 99% of UV</li><li>No signal interference</li><li>Clear night visibility</li></ul>
+      </div>
+      <div class="tier">
+        <h3>Premium Ceramic IR</h3>
+        <p>Top-tier heat rejection for drivers who want the coolest cabin possible, even at lighter shades.</p>
+        <ul><li>Maximum infrared rejection</li><li>Works at legal front shades</li><li>Best comfort on long drives</li></ul>
+      </div>
+    </div>
+    <p class="wrap center"><strong>Pricing depends on your vehicle and film.</strong> Call or send a quote request and we'll give you an exact price.</p>
+  </section>
+
+  <section class="section" id="windshield">
+    <div class="wrap grid-2">
+      <div class="photo"><Stock name="view-through-car-window" alt="View out of a car window toward mountains" width={900} /></div>
+      <div>
+        <h2>Windshield &amp; <span class="accent">Sun Strip</span></h2>
+        <hr class="rule" />
+        <p>Your windshield lets in more sun than any other window. A clear, heat-rejecting windshield film cuts heat on your face and hands without darkening your view.</p>
+        <p>We also install a sun strip across the top of the windshield. California allows a non-reflective strip in the top 4 inches, and it makes a huge difference with morning and evening glare.</p>
+        <p class="small">Ask us which windshield films are right for your vehicle and California law.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="wrap center">
+      <h2>How It <span class="accent">Works</span></h2>
+      <hr class="rule" />
+    </div>
+    <ol class="wrap steps">
+      <li><strong>Call, text or request a quote.</strong> Tell us your vehicle and what you want. We'll give you a price.</li>
+      <li><strong>Pick your film and shade.</strong> See real samples at the shop, no pressure.</li>
+      <li><strong>Drop off or wait.</strong> Most cars are done in 2 to 3 hours.</li>
+      <li><strong>Drive away cooler.</strong> Keep the windows up a few days while it cures.</li>
+    </ol>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap"><ReviewCarousel light /></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Car Tint <span class="accent">FAQ</span></h2>
+      <hr class="rule" />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .tiers { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); margin-bottom: 28px; }
+  .tier { background: var(--white); border-radius: var(--radius); padding: 30px; border: 2px solid var(--gray-200); position: relative; }
+  .tier--best { border-color: var(--orange); }
+  .tier__tag { position: absolute; top: -14px; left: 24px; background: var(--orange); font: 700 1rem var(--display); text-transform: uppercase; padding: 4px 12px; border-radius: 999px; }
+  .tier ul { padding-left: 1.1em; margin: 0; }
+  .photo { aspect-ratio: 4 / 3; }
+  .small { font-size: .95rem; color: var(--gray-500); }
+  .steps { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); list-style: none; padding: 0; counter-reset: s; }
+  .steps li { counter-increment: s; background: #171717; border-radius: var(--radius); padding: 26px; color: #d6d6d6; }
+  .steps li::before { content: counter(s, decimal-leading-zero); display: block; font: 800 2.6rem/1 var(--display); color: var(--orange); margin-bottom: 10px; }
+  .steps strong { color: var(--white); display: block; margin-bottom: 6px; font-size: 1.1rem; }
+</style>

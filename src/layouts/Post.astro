@@ -1,0 +1,25 @@
+---
+import Base from './Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+const { frontmatter } = Astro.props;
+const date = new Date(frontmatter.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+---
+<Base title={`${frontmatter.title} | The Tint House Blog`} description={frontmatter.description}>
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow-line"><a href="/blog/">Blog</a> · {date}</p>
+      <h1 class="post-title">{frontmatter.title}</h1>
+      <p class="lead">{frontmatter.description}</p>
+    </div>
+  </section>
+  <article class="section">
+    <div class="wrap prose">
+      <slot />
+    </div>
+  </article>
+  <CtaBand />
+</Base>
+<style>
+  .post-title { font-size: clamp(2.4rem, 5vw, 4rem); max-width: 22ch; }
+  .eyebrow-line a { text-decoration: none; }
+</style>

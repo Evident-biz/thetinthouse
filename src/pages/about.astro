@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Stock from '../components/Stock.astro';
+import { site } from '../data/site';
+---
+<Base title="About The Tint House | Window Tint Shop in Patterson, CA" description="From a home garage to a 5-star shop on Las Palmas Ave. Meet The Tint House, Best of 209 2024 and 2025.">
+  <PageHero eyebrow="About Us" title='From a Garage to <span class="accent">Best of 209</span>' lead="The Tint House started out of a garage at home. Today we're a full window film shop in downtown Patterson." />
+
+  <section class="section">
+    <div class="wrap grid-2">
+      <div class="photo"><Stock name="sports-car-wheel" alt="Close-up of a sports car front wheel" width={900} /></div>
+      <div class="prose">
+        <h2>Our <span class="accent">Story</span></h2>
+        <hr class="rule" />
+        <!-- TODO: owner to confirm year opened and fill in details -->
+        <p>It started the way a lot of good local shops do: tinting cars for friends and family in a home garage. The work spoke for itself, word spread around the 209, and the garage got too small.</p>
+        <p>Today The Tint House is a full shop at {site.address.street} in Patterson, tinting cars, trucks and SUVs, and installing window film for homes and businesses across the Valley.</p>
+        <p>We've been voted Best of 209 two years running, in 2024 and 2025, and we've earned a 5-star rating across {site.rating.count} Google reviews. We're proud of that, and we work to keep it every day.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="wrap">
+      <h2>How We <span class="accent">Work</span></h2>
+      <hr class="rule" />
+      <div class="values">
+        <div><h3>Honest Advice</h3><p>We tell you what's legal, what's worth it and what isn't. No upselling film you don't need.</p></div>
+        <div><h3>See Before You Buy</h3><p>We show you real samples of each shade on glass before you decide.</p></div>
+        <div><h3>Clean Work</h3><p>Careful prep, tight edges and no bubbles. Every install comes with a warranty.</p></div>
+        <div><h3>Fair Prices</h3><p>Customers call around and keep telling us we're the best value they found.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+<style>
+  .photo { aspect-ratio: 4 / 3; }
+  .values { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .values > div { background: #171717; border-radius: var(--radius); padding: 26px; border-top: 4px solid var(--orange); }
+  .values h3 { color: var(--orange); }
+  .values p { margin: 0; color: #d3d3d3; }
+</style>

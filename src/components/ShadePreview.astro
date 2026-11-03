@@ -1,0 +1,55 @@
+---
+import Stock from './Stock.astro';
+// VLT = visible light transmission. Lower number = darker.
+const shades = [
+  { vlt: 70, label: '70%', note: 'Legal on front side windows in California (combined with factory glass).', legalFront: true },
+  { vlt: 50, label: '50%', note: 'Light and classy. Rear side and back glass only in California.', legalFront: false },
+  { vlt: 35, label: '35%', note: 'Our most popular rear shade. Noticeable privacy, easy to see out at night.', legalFront: false },
+  { vlt: 20, label: '20%', note: 'Dark and sleek. Strong privacy. Rear windows only in California.', legalFront: false },
+  { vlt: 5, label: '5%', note: '"Limo" tint. Maximum privacy. Rear windows only in California.', legalFront: false },
+];
+---
+<div class="shade" data-shade>
+  <div class="shade__view">
+    <Stock name="view-through-car-window" alt="View out of a car side window" width={1000} />
+    <div class="shade__film" style="opacity:.3"></div>
+    <span class="shade__badge">70%</span>
+  </div>
+  <div class="shade__controls" role="radiogroup" aria-label="Tint shade">
+    {shades.map((s, i) => (
+      <button type="button" role="radio" aria-checked={i === 0 ? 'true' : 'false'} data-vlt={s.vlt} data-note={s.note} data-front={String(s.legalFront)}>{s.label}</button>
+    ))}
+  </div>
+  <p class="shade__note" aria-live="polite">{shades[0].note}</p>
+  <p class="shade__small">Preview is an approximation. Come by the shop to see real samples on glass.</p>
+</div>
+
+<style>
+  .shade__view { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 16 / 9; background: #000; }
+  .shade__view :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .shade__film { position: absolute; inset: 0; background: #050505; transition: opacity .35s; }
+  .shade__badge { position: absolute; top: 14px; left: 14px; background: var(--orange); color: var(--black); font: 800 1.6rem var(--display); padding: 6px 14px; border-radius: 999px; }
+  .shade__controls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 14px; }
+  .shade__controls button { min-height: 52px; border-radius: 12px; border: 2px solid var(--gray-200); background: var(--white); font: 700 1.3rem var(--display); cursor: pointer; color: var(--ink); }
+  .shade__controls button[aria-checked='true'] { border-color: var(--orange); background: var(--orange); }
+  .shade__note { font-weight: 600; margin: 14px 0 4px; min-height: 3.2em; }
+  .shade__small { font-size: .9rem; color: var(--gray-500); margin: 0; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-shade]').forEach((root) => {
+    const film = root.querySelector<HTMLElement>('.shade__film')!;
+    const badge = root.querySelector<HTMLElement>('.shade__badge')!;
+    const note = root.querySelector<HTMLElement>('.shade__note')!;
+    root.querySelectorAll<HTMLButtonElement>('button[data-vlt]').forEach((b) => {
+      b.addEventListener('click', () => {
+        root.querySelectorAll('button[data-vlt]').forEach((x) => x.setAttribute('aria-checked', 'false'));
+        b.setAttribute('aria-checked', 'true');
+        const vlt = Number(b.dataset.vlt);
+        film.style.opacity = String(Math.min(0.95, (100 - vlt) / 100));
+        badge.textContent = `${vlt}%`;
+        note.textContent = b.dataset.note ?? '';
+      });
+    });
+  });
+</script>

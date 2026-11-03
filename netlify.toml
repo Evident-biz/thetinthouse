@@ -1,0 +1,21 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Old Wix URLs -> new pages
+[[redirects]]
+  from = "/automotive"
+  to = "/automotive-window-tint/"
+  status = 301
+[[redirects]]
+  from = "/architercual-film"
+  to = "/services/"
+  status = 301
+[[redirects]]
+  from = "/copy-of-about-us"
+  to = "/about/"
+  status = 301
+[[redirects]]
+  from = "/contact-3"
+  to = "/contact/"
+  status = 301

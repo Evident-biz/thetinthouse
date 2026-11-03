@@ -1,0 +1,36 @@
+---
+import { site, reviews } from '../data/site';
+interface Props { light?: boolean }
+const { light = false } = Astro.props;
+---
+<div class:list={['reviews', { 'reviews--light': light }]}>
+  <div class="reviews__summary">
+    <span class="reviews__score">{site.rating.value}</span>
+    <span>
+      <span class="stars" aria-hidden="true">★★★★★</span><br />
+      <strong>{site.rating.count} Google reviews</strong>
+    </span>
+    <a class="btn btn--ghost reviews__all" href={site.reviewsUrl} target="_blank" rel="noopener">Read them on Google</a>
+  </div>
+  <div class="reviews__track" tabindex="0" aria-label="Customer reviews, scroll sideways for more">
+    {reviews.map((r) => (
+      <figure class="review">
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote>"{r.text}"</blockquote>
+        <figcaption>{r.name} <span>· Google review</span></figcaption>
+      </figure>
+    ))}
+  </div>
+</div>
+
+<style>
+  .reviews__summary { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; font-size: 1.1rem; }
+  .reviews__score { font: 800 4rem/1 var(--display); color: var(--orange); }
+  .reviews__all { min-height: 46px; font-size: 1.05rem; }
+  .reviews__track { display: grid; grid-auto-flow: column; grid-auto-columns: min(86%, 380px); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; }
+  .review { scroll-snap-align: start; margin: 0; background: var(--white); color: var(--ink); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--gray-200); }
+  .review blockquote { margin: 0; font-size: 1.05rem; flex: 1; }
+  .review figcaption { font-weight: 700; }
+  .review figcaption span { font-weight: 400; color: var(--gray-500); }
+  .reviews--light .review { background: var(--cream); }
+</style>

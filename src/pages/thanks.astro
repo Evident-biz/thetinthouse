@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Thanks! | The Tint House" description="We got your quote request." noindex>
+  <section class="page-hero thanks">
+    <div class="wrap">
+      <p class="eyebrow-line">Request received</p>
+      <h1>Got it. <span class="accent">Thank you!</span></h1>
+      <p class="lead" id="msg">We'll call or text you back within {site.responseWindow} during shop hours.</p>
+      <p>Need us sooner? Give us a call.</p>
+      <div class="btn-row">
+        <a class="btn btn--orange" href={site.phoneHref}>Call {site.phone}</a>
+        <a class="btn btn--ghost" href="/">Back to Home</a>
+      </div>
+    </div>
+  </section>
+  <script is:inline>
+    // Shop hours: Tue-Sat 9-5 (Pacific). Outside hours, say when we'll reach out.
+    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
+    const day = now.getDay(); const hr = now.getHours();
+    const open = day >= 2 && day <= 6 && hr >= 9 && hr < 17;
+    if (!open) {
+      const names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      let next = new Date(now);
+      if (day >= 2 && day <= 6 && hr < 9) { /* later today */ } else {
+        do { next.setDate(next.getDate() + 1); } while (next.getDay() < 2);
+      }
+      const label = next.toDateString() === now.toDateString() ? 'this morning' : `${names[next.getDay()]} morning`;
+      document.getElementById('msg').textContent = `We're closed right now. We'll reach out first thing ${label}.`;
+    }
+  </script>
+</Base>
+<style>.thanks { min-height: 60vh; display: flex; align-items: center; }</style>

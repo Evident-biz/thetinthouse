@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ShadePreview from '../components/ShadePreview.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+
+const faq = [
+  { q: 'Can I tint my front windows in California?', a: 'Only lightly. Front side windows must let in at least 70% of light, and that includes the factory glass, which already blocks some light. In practice that means a very light or clear heat-rejecting film. We will tell you what your glass allows.' },
+  { q: 'How dark can my back windows be?', a: 'Rear side windows and the back window can be any darkness, as long as your vehicle has outside mirrors on both sides.' },
+  { q: 'Can I tint my windshield?', a: 'You can have a non-reflective tint strip on the top 4 inches of the windshield. Ask us about clear heat-rejecting windshield options and what is allowed.' },
+  { q: 'What happens if my tint is too dark?', a: 'You can get a "fix-it" ticket, which means removing the illegal film and getting the correction signed off, and possibly a fine. Removing and redoing tint costs more than doing it right the first time.' },
+  { q: 'Is there a medical exemption?', a: 'California has limited medical exemptions for people with certain conditions. Talk to your doctor and check the current DMV requirements before you rely on one.' },
+];
+---
+<Base title="California Window Tint Law (2026) | What's Legal | The Tint House" description="California window tint laws in plain English: 70% front side windows, any shade in the rear, top 4 inches of windshield. From The Tint House in Patterson, CA.">
+  <PageHero eyebrow="California Tint Law" title='What&apos;s <span class="accent">Legal</span> in California' lead="Plain-English answers so you can choose a shade with confidence and skip the fix-it ticket." cta={false} />
+
+  <section class="section">
+    <div class="wrap grid-2 law">
+      <div class="prose">
+        <h2>The Quick <span class="accent">Answer</span></h2>
+        <table>
+          <thead><tr><th>Window</th><th>What's allowed</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Windshield</strong></td><td>Non-reflective tint on the top 4 inches only</td></tr>
+            <tr><td><strong>Front side windows</strong></td><td>Must let in at least 70% of light, counting factory glass</td></tr>
+            <tr><td><strong>Rear side windows</strong></td><td>Any darkness</td></tr>
+            <tr><td><strong>Back window</strong></td><td>Any darkness, if you have outside mirrors on both sides</td></tr>
+            <tr><td><strong>Reflective / mirror tint</strong></td><td>Can't be more reflective than standard glass</td></tr>
+            <tr><td><strong>Colors</strong></td><td>No red, amber or blue tint on the windshield or front side windows</td></tr>
+          </tbody>
+        </table>
+        <p>The rules come from the California Vehicle Code, Section 26708 and related sections. Laws can change, so check the current code or ask us before you buy.</p>
+        <p class="disclaimer">This page is general information, not legal advice.</p>
+      </div>
+      <div>
+        <h2>See the <span class="accent">Difference</span></h2>
+        <ShadePreview />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <h2>Tint Law <span class="accent">FAQ</span></h2>
+      <hr class="rule" />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand title="Want It Done Right?" text="We'll help you pick a shade that looks great and keeps you legal." />
+</Base>
+<style>
+  .law { align-items: start; }
+  .disclaimer { font-size: .95rem; color: var(--gray-500); }
+</style>

@@ -1,0 +1,88 @@
+---
+// Netlify Forms handles submissions and emails the owner. See docs/homepage-blueprint.md
+// for the planned move to Supabase + the phone admin.
+import { site } from '../data/site';
+interface Props { compact?: boolean; id?: string }
+const { compact = false, id = 'quote' } = Astro.props;
+---
+<form
+  id={id}
+  class:list={['qform', { 'qform--compact': compact }]}
+  name="quote"
+  method="POST"
+  action="/thanks/"
+  enctype="multipart/form-data"
+  data-netlify="true"
+  netlify-honeypot="company"
+>
+  <input type="hidden" name="form-name" value="quote" />
+  <p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off" /></label></p>
+
+  <div class="qform__row">
+    <label>Name<input name="name" required autocomplete="name" /></label>
+    <label>Phone<input name="phone" type="tel" required autocomplete="tel" inputmode="tel" /></label>
+  </div>
+
+  <fieldset class="qform__what">
+    <legend>What are we tinting?</legend>
+    <label class="chip"><input type="radio" name="tinting" value="Car / Truck / SUV" required checked /> Car / Truck / SUV</label>
+    <label class="chip"><input type="radio" name="tinting" value="Home" /> Home</label>
+    <label class="chip"><input type="radio" name="tinting" value="Business" /> Business</label>
+  </fieldset>
+
+  <label class="qform__vehicle"><span>Year, make &amp; model</span><input name="vehicle" placeholder="e.g. 2022 Toyota Tacoma" /></label>
+
+  <fieldset class="qform__how">
+    <legend>How should we reach you?</legend>
+    <label class="chip"><input type="radio" name="contact_method" value="Call me" required checked /> Call me</label>
+    <label class="chip"><input type="radio" name="contact_method" value="Text me a quote" /> Text me a quote</label>
+  </fieldset>
+
+  {!compact && (
+    <>
+      <label><span>Anything we should know? <span class="opt">(optional)</span></span><textarea name="message" rows="3" placeholder="Shade you want, windows to do, best time to reach you..."></textarea></label>
+      <label><span>Add a photo <span class="opt">(optional, great for home and business jobs)</span></span><input name="photo" type="file" accept="image/*" /></label>
+    </>
+  )}
+
+  <label class="consent"><input type="checkbox" name="sms_consent" value="yes" /> It's OK to text me about my quote. Msg &amp; data rates may apply. Reply STOP to opt out.</label>
+
+  <button class="btn btn--orange qform__submit" type="submit">Request My Free Quote</button>
+  <p class="qform__promise">We'll call or text you back within {site.responseWindow} during shop hours. Prefer to talk now? <a href={site.phoneHref}>Call {site.phone}</a></p>
+</form>
+
+<style>
+  .qform { display: grid; gap: 16px; background: var(--white); color: var(--ink); padding: clamp(20px, 3vw, 32px); border-radius: var(--radius); box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+  .qform__row { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 560px) { .qform__row { grid-template-columns: 1fr 1fr; } }
+  label { display: grid; gap: 6px; font-weight: 600; font-size: 1rem; }
+  .opt { font-weight: 400; color: var(--gray-500); }
+  input:not([type='radio']):not([type='checkbox']), textarea {
+    font: 400 1.05rem var(--body); padding: 13px 14px; border: 2px solid var(--gray-200); border-radius: 10px; background: var(--white); color: var(--ink); width: 100%;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--orange); }
+  fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  legend { font-weight: 600; font-size: 1rem; margin-bottom: 8px; width: 100%; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border: 2px solid var(--gray-200); border-radius: 999px; cursor: pointer; font-weight: 600; }
+  .chip:has(input:checked) { border-color: var(--orange); background: #fff4e8; }
+  .chip input { accent-color: var(--orange); width: 18px; height: 18px; }
+  .consent { display: flex; align-items: flex-start; gap: 10px; font-weight: 400; font-size: .92rem; color: var(--gray-700); }
+  .consent input { margin-top: 4px; accent-color: var(--orange); width: 18px; height: 18px; flex: none; }
+  .qform__submit { width: 100%; }
+  .qform__promise { font-size: .95rem; color: var(--gray-700); margin: 0; text-align: center; }
+  .hp { position: absolute; left: -9999px; }
+  .qform__vehicle[hidden] { display: none; }
+</style>
+
+<script>
+  // Hide the vehicle field when the job isn't a vehicle.
+  document.querySelectorAll<HTMLFormElement>('form.qform').forEach((form) => {
+    const vehicle = form.querySelector<HTMLElement>('.qform__vehicle');
+    const update = () => {
+      const v = (form.querySelector('input[name="tinting"]:checked') as HTMLInputElement | null)?.value;
+      if (vehicle) vehicle.hidden = v !== 'Car / Truck / SUV';
+    };
+    form.addEventListener('change', update);
+    update();
+  });
+</script>

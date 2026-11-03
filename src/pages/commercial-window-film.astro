@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import Stock from '../components/Stock.astro';
+
+const faq = [
+  { q: 'Can you work around our business hours?', a: 'Yes. We schedule installs to keep disruption to a minimum. Just tell us what works for your team and customers.' },
+  { q: 'Will film make our storefront hard to see into?', a: 'You choose. Light films cut heat and glare while keeping your displays visible. Reflective films add privacy for offices and back rooms.' },
+  { q: 'Do you do lettering and logos?', a: 'Yes. We cut and install vinyl lettering, store hours and logo decals for windows and doors.' },
+];
+---
+<Base
+  title="Commercial Window Tint Patterson, CA | Storefront & Office Film | The Tint House"
+  description="Commercial window film for storefronts and offices in Patterson and the 209. Lower cooling costs, reduce glare, add privacy, plus vinyl lettering. Free quotes."
+>
+  <PageHero eyebrow="Commercial" title='Storefront &amp; <span class="accent">Office Film</span>' lead="Keep your space comfortable for customers and staff, cut glare on screens, and give your building a clean, professional look." />
+
+  <section class="section">
+    <div class="wrap grid-2">
+      <div>
+        <h2>Built for <span class="accent">Business</span></h2>
+        <hr class="rule" />
+        <ul class="checks">
+          <li>Lower cooling load on hot afternoons</li>
+          <li>Less glare on registers, monitors and displays</li>
+          <li>Privacy for offices, conference rooms and back rooms</li>
+          <li>UV protection for merchandise and interiors</li>
+          <li>Safety film that helps hold broken glass in place</li>
+          <li>Installs scheduled around your hours</li>
+        </ul>
+        <a class="btn btn--orange" href="/contact/#quote">Get a Free Quote</a>
+      </div>
+      <div class="photo"><Stock name="glass-office-tower" alt="Glass office building against the sky" width={800} /></div>
+    </div>
+  </section>
+
+  <section class="section section--cream" id="decals">
+    <div class="wrap grid-2">
+      <div class="photo"><Stock name="sunset-street" alt="Main street storefronts at sunset" width={900} /></div>
+      <div>
+        <h2>Vinyl Lettering &amp; <span class="accent">Decals</span></h2>
+        <hr class="rule" />
+        <p>Store hours, phone numbers, logos and window lettering, cut and installed by the same crew that tints your glass. A simple way to look sharp and get noticed from the street.</p>
+        <a class="btn btn--orange" href="/contact/#quote">Ask About Decals</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Commercial <span class="accent">FAQ</span></h2>
+      <hr class="rule" />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand title="Get a Free Business Quote" text="Send a photo of your storefront or office windows with a quote request, or call and we'll come take a look." />
+</Base>
+
+<style>
+  .photo { aspect-ratio: 4 / 3; }
+  .checks { list-style: none; padding: 0; margin-bottom: 26px; }
+  .checks li { padding-left: 30px; position: relative; margin-bottom: 10px; }
+  .checks li::before { content: '✓'; position: absolute; left: 0; color: var(--orange); font-weight: 800; }
+</style>

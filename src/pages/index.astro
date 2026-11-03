@@ -1,0 +1,294 @@
+---
+// Section order mirrors the owner's reference site (see docs/homepage-blueprint.md).
+import Base from '../layouts/Base.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import ReviewCarousel from '../components/ReviewCarousel.astro';
+import Stock from '../components/Stock.astro';
+import { site, services } from '../data/site';
+
+const posts = Object.values(import.meta.glob<any>('./blog/*.md', { eager: true }))
+  .sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date))
+  .slice(0, 3);
+
+const benefits = [
+  { n: '01', t: 'Cooler Cabin & Home', d: 'Ceramic film rejects a big share of infrared heat, the part of sunlight you feel on your skin. Your AC works less in July.' },
+  { n: '02', t: 'UV Protection', d: 'Quality films block about 99% of UV rays, protecting your skin, dashboard, leather, floors and furniture from fading.' },
+  { n: '03', t: 'Privacy & Security', d: 'Darker shades for rear glass, mirror and frosted film at home, and safety film that holds broken glass together.' },
+  { n: '04', t: 'Expert, Legal Install', d: 'Clean edges, no bubbles, and shades that follow California law. We tell you straight what is legal on each window.' },
+];
+---
+<Base
+  title="Window Tint Patterson, CA | The Tint House | Auto, Home & Commercial"
+  description="5-star window tint shop in Patterson, CA. Ceramic car tint, home and commercial window film. Best of 209 2024 & 2025. Call (209) 695-7309 for a free quote."
+>
+  <!-- 3. Hero: quote form + media -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__head">
+        <p class="hero__trust"><span class="stars">★★★★★</span> {site.rating.value} · {site.rating.count} Google reviews · Best of 209 2024 &amp; 2025</p>
+        <h1>Window Tint in <span class="accent">Patterson, CA</span></h1>
+        <p class="lead">Ceramic tint for cars, trucks and SUVs, plus window film for homes and businesses. Beat the Valley heat with a shop the 209 trusts.</p>
+      </div>
+      <div class="hero__grid">
+        <div class="hero__form">
+          <h2 class="hero__formtitle">Get a Free Quote <span class="accent">Today</span></h2>
+          <hr class="rule" />
+          <QuoteForm compact id="quote-home" />
+        </div>
+        <div class="hero__media">
+          <div class="frame">
+            <!-- TODO: swap for a 15-30s install video from the owner -->
+            <Stock name="car-window-sun" alt="Sunlight glaring off a car's side window" width={1000} loading="eager" />
+          </div>
+          <ul class="hero__chips">
+            <li>Walk-ins welcome</li>
+            <li>Most cars done in 2-3 hours</li>
+            <li>Warranty on every install</li>
+            <li>Financing with Affirm</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn--orange" href={site.phoneHref}>Call {site.phone}</a>
+            <a class="btn btn--ghost" href={site.smsHref}>Text Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Reviews -->
+  <section class="section section--cream">
+    <div class="wrap center">
+      <h2>What Our Customers <span class="accent">Are Saying</span></h2>
+      <hr class="rule" />
+    </div>
+    <div class="wrap">
+      <ReviewCarousel light />
+    </div>
+  </section>
+
+  <!-- 5. Financing -->
+  <section class="financing">
+    <div class="wrap financing__inner">
+      <div>
+        <p class="financing__label">Now Offering</p>
+        <h2>Tint Now, <span class="accent">Pay Over Time</span></h2>
+        <p>Split your install into monthly payments with Affirm. Quick eligibility check, no surprises. Ask us when you call.</p>
+      </div>
+      <a class="btn btn--orange" href={site.phoneHref}>Ask About Financing</a>
+    </div>
+    <p class="wrap financing__fine">Rates from 0-36% APR. Payment options through Affirm are subject to an eligibility check. <a href="https://www.affirm.com/licenses" target="_blank" rel="noopener">See Affirm disclosures</a>.</p>
+  </section>
+
+  <!-- 6. Services (flip cards) -->
+  <section class="section">
+    <div class="wrap center">
+      <h2>Window Tint &amp; Film <span class="accent">Services</span></h2>
+      <hr class="rule" />
+      <p class="lead">Cars, homes and storefronts. Tap a card to learn more.</p>
+    </div>
+    <div class="wrap flips">
+      {services.map((s) => (
+        <div class="flip" tabindex="0">
+          <div class="flip__inner">
+            <div class="flip__front">
+              <Stock name={s.image} alt="" width={600} />
+              <h3>{s.title}</h3>
+            </div>
+            <div class="flip__back">
+              <h3>{s.title}</h3>
+              <p>{s.short}</p>
+              <div class="flip__actions">
+                <a class="btn btn--orange" href={site.phoneHref}>Call for a Free Quote</a>
+                <a class="flip__more" href={`/${s.slug}/${s.anchor ?? ''}`}>Learn more →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 7. About -->
+  <section class="section section--dark">
+    <div class="wrap grid-2">
+      <div class="photo about__photo">
+        <!-- TODO: owner + crew photo -->
+        <Stock name="white-car-side" alt="Close-up of a white car side panel" width={900} />
+      </div>
+      <div>
+        <h2>About <span class="accent">The Tint House</span></h2>
+        <hr class="rule" />
+        <p class="lead">We started out of a garage at home, tinting cars for friends and family. Word got around, and today The Tint House is a full shop on Las Palmas Ave in Patterson.</p>
+        <p>Customers keep coming back for the same reasons: honest advice, fair prices and clean work. We walk you through your options, show you real samples of each shade, and never push you into film you don't need.</p>
+        <div class="about__boxes">
+          <div>
+            <h3>Our Commitment</h3>
+            <p>Quality film, careful installs and a warranty on every job. If something isn't right, we make it right.</p>
+          </div>
+          <div>
+            <h3>Owner on Site</h3>
+            <p>Allan is in the shop and on the job. Ask for him, he'll take care of you.</p>
+          </div>
+        </div>
+        <a class="btn btn--ghost" href="/about/">Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CTA band -->
+  <section class="cta-band">
+    <div class="wrap grid-2">
+      <div>
+        <h2>Beat the <span class="accent-dark">Valley Heat</span></h2>
+        <p class="lead">Summers in the 209 hit 100° and up. Ceramic tint keeps your car and home noticeably cooler, cuts glare, and protects your interior. Free quotes, no pressure.</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href={site.phoneHref}>Call {site.phone}</a>
+          <a class="btn btn--ghost" href="/contact/#quote">Request a Quote</a>
+        </div>
+      </div>
+      <div class="photo"><Stock name="white-convertible" alt="White convertible parked under trees" width={900} /></div>
+    </div>
+  </section>
+
+  <!-- 9. Benefits -->
+  <section class="section">
+    <div class="wrap center">
+      <h2>Why <span class="accent">Window Film</span></h2>
+      <hr class="rule" />
+    </div>
+    <div class="wrap benefits">
+      {benefits.map((b) => (
+        <div class="benefit">
+          <span class="benefit__n">{b.n}</span>
+          <h3>{b.t}</h3>
+          <p>{b.d}</p>
+        </div>
+      ))}
+    </div>
+    <p class="wrap center law-note">Front side windows in California must let in at least 70% of light. <a href="/california-tint-law/">See what's legal on every window →</a></p>
+  </section>
+
+  <!-- 10. Awards -->
+  <section class="section section--charcoal">
+    <div class="wrap center">
+      <h2>Recognized <span class="accent">in the 209</span></h2>
+      <hr class="rule" />
+    </div>
+    <div class="wrap awards">
+      <div class="award"><span class="award__big">Best of 209</span><span>2024 Winner</span></div>
+      <div class="award"><span class="award__big">Best of 209</span><span>2025 Winner</span></div>
+      <div class="award"><span class="award__big">5.0 ★</span><span>{site.rating.count} Google reviews</span></div>
+    </div>
+  </section>
+
+  <!-- 11. Brands -->
+  <section class="brands">
+    <div class="wrap center">
+      <h2>Premium Films <span class="accent">We Install</span></h2>
+    </div>
+    <div class="brands__row wrap">
+      {site.brands.map((b) => <span>{b}</span>)}
+    </div>
+  </section>
+
+  <!-- 12. Blog -->
+  <section class="section section--cream">
+    <div class="wrap center">
+      <h2>Tint Tips &amp; <span class="accent">Answers</span></h2>
+      <hr class="rule" />
+    </div>
+    <div class="wrap posts">
+      {posts.map((p) => (
+        <a class="post" href={p.url}>
+          <span class="post__date">{new Date(p.frontmatter.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+          <h3>{p.frontmatter.title}</h3>
+          <p>{p.frontmatter.description}</p>
+          <span class="post__more">Read more →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { background: radial-gradient(1200px 500px at 80% -10%, #2a1a08 0%, var(--black) 60%); color: var(--white); padding: clamp(44px, 7vw, 84px) 0 clamp(56px, 8vw, 96px); }
+  .hero__head { max-width: 900px; margin-bottom: clamp(28px, 4vw, 48px); }
+  .hero__trust { font-weight: 600; color: #e9e9e9; margin-bottom: 14px; }
+  .hero .lead { color: #d8d8d8; }
+  .hero__grid { display: grid; gap: clamp(28px, 4vw, 56px); grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 960px) { .hero__grid { grid-template-columns: 1fr 1fr; } }
+  .hero__formtitle { font-size: clamp(2rem, 3.4vw, 2.8rem); margin-bottom: 12px; }
+  .frame { position: relative; border: 4px solid var(--white); border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 3; }
+  .frame :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero__chips { list-style: none; padding: 0; margin: 22px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hero__chips li { background: #1d1d1d; border: 1px solid #2d2d2d; border-radius: 12px; padding: 12px 14px; font-weight: 600; font-size: 1rem; }
+  .hero__chips li::before { content: '✓ '; color: var(--orange); }
+  @media (max-width: 959px) { .hero__media { order: -1; } }
+
+  .financing { background: var(--orange); color: var(--black); padding: 44px 0 20px; }
+  .financing__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+  .financing h2 { margin-bottom: 8px; }
+  .financing .accent { color: var(--white); }
+  .financing__label { font: 700 1.2rem var(--display); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+  .financing .btn--orange { background: var(--black); color: var(--white); }
+  .financing__fine { font-size: .9rem; margin-top: 18px; }
+
+  .flips { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .flip { perspective: 1200px; height: 360px; border-radius: var(--radius); outline-offset: 4px; }
+  .flip__inner { position: relative; width: 100%; height: 100%; transition: transform .6s; transform-style: preserve-3d; }
+  .flip.is-flipped .flip__inner { transform: rotateY(180deg); }
+  @media (hover: hover) { .flip:hover .flip__inner, .flip:focus-within .flip__inner { transform: rotateY(180deg); } }
+  .flip__front, .flip__back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); overflow: hidden; }
+  .flip__front :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .flip__front::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,.85)); }
+  .flip__front h3 { position: absolute; left: 22px; right: 22px; bottom: 18px; color: var(--white); z-index: 1; margin: 0; font-size: 2rem; }
+  .flip__back { transform: rotateY(180deg); background: var(--black); color: var(--white); padding: 28px; display: flex; flex-direction: column; justify-content: center; text-align: left; border: 3px solid var(--orange); }
+  .flip__back h3 { color: var(--orange); }
+  .flip__actions { display: grid; gap: 12px; margin-top: 8px; }
+  .flip__actions .btn { font-size: 1.1rem; min-height: 48px; }
+  .flip__more { color: var(--white); font-weight: 600; }
+  @media (prefers-reduced-motion: reduce) { .flip__inner { transition: none; } }
+
+  .about__photo { aspect-ratio: 4 / 3; }
+  .about__boxes { display: grid; gap: 18px; grid-template-columns: 1fr; margin: 26px 0; }
+  @media (min-width: 560px) { .about__boxes { grid-template-columns: 1fr 1fr; } }
+  .about__boxes > div { background: #171717; border-left: 4px solid var(--orange); border-radius: 10px; padding: 18px 20px; }
+  .about__boxes h3 { font-size: 1.5rem; color: var(--orange); margin-bottom: 6px; }
+  .about__boxes p { margin: 0; color: #d3d3d3; }
+
+  .cta-band { background: var(--orange); padding: clamp(56px, 8vw, 96px) 0; color: var(--black); }
+  .cta-band .photo { aspect-ratio: 3 / 2; box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+  .accent-dark { color: var(--white); }
+
+  .benefits { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .benefit { background: var(--cream); border-radius: var(--radius); padding: 28px; border-top: 5px solid var(--orange); }
+  .benefit__n { font: 800 2.6rem/1 var(--display); color: var(--orange); display: block; margin-bottom: 10px; }
+  .benefit p { margin: 0; }
+  .law-note { margin-top: 32px; font-weight: 600; }
+
+  .awards { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .award { border: 3px solid var(--orange); border-radius: var(--radius); padding: 34px 20px; display: grid; gap: 6px; text-align: center; font-weight: 600; font-size: 1.1rem; }
+  .award__big { font: 800 2.8rem/1 var(--display); text-transform: uppercase; color: var(--orange); }
+
+  .brands { background: var(--black); color: var(--white); padding: 56px 0 64px; }
+  .brands h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+  .brands__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 18px; }
+  .brands__row span { font: 700 1.6rem var(--display); text-transform: uppercase; padding: 14px 28px; border: 1px solid #333; border-radius: 999px; color: #e5e5e5; }
+
+  .posts { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .post { background: var(--white); border-radius: var(--radius); padding: 28px; text-decoration: none; display: flex; flex-direction: column; border: 1px solid var(--gray-200); transition: transform .15s, border-color .15s; }
+  .post:hover { transform: translateY(-3px); border-color: var(--orange); }
+  .post__date { color: var(--gray-500); font-size: .95rem; margin-bottom: 8px; }
+  .post p { flex: 1; }
+  .post__more { color: var(--orange-dark); font-weight: 700; }
+</style>
+
+<script>
+  // Tap to flip on touch screens.
+  document.querySelectorAll<HTMLElement>('.flip').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) return;
+      card.classList.toggle('is-flipped');
+    });
+  });
+</script>
