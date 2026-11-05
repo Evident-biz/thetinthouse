@@ -20,13 +20,17 @@ npm run build    # outputs to dist/
 
 ## Quote form
 
-Uses Netlify Forms (free tier) so it works on deploy with no backend: submissions show in the Netlify dashboard and can email the owner (Site settings > Forms > Notifications). Planned upgrade: Supabase + phone admin (see blueprint).
+Uses Netlify Forms (free tier) so it works on deploy with no backend: submissions show in the Netlify dashboard and can email the owner (Site settings > Forms > Notifications).
+
+## Updating content
+
+No CMS or database, on purpose. The owner texts changes (photos, hours, promos, logos) to Evident; edit the files, rebuild, redeploy. Photos go in `src/assets/stock/` (or a new `src/assets/work/` folder), logos in `public/brands/`, hours and text in `src/data/site.ts`.
 
 ## Before launch (needs owner)
 
 - [ ] Real photos and a short install video to replace stock images (hero frame, about, service cards)
 - [x] Logo (wordmark received)
-- [ ] Brand logo files (owner will send; drop in `public/brands/`) and confirm film tiers on automotive page
+- [ ] Brand and partner logo files (owner will send; drop in `public/brands/`, set `logo` in `site.ts`) and confirm film tiers on automotive page
 - [x] Warranty: lifetime against fading, peeling, bubbling, adhesive failure
 - [x] Response promise: no timed promise ("as soon as we can")
 - [ ] Public email address, if he wants one shown

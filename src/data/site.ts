@@ -41,6 +41,9 @@ export const site = {
     { name: 'Geoshield', logo: '' },
     { name: 'Hitek', logo: '' },
     { name: 'Union Window Films', logo: '' },
+  ],
+  // Local businesses he works with (not film brands). Same logo rule as above.
+  partners: [
     { name: 'Azteca 525 Printing', logo: '' },
     { name: '3D Professional Detailing', logo: '' },
     { name: 'Evident Business Solutions', logo: '' },
