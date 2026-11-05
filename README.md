@@ -25,13 +25,13 @@ Uses Netlify Forms (free tier) so it works on deploy with no backend: submission
 ## Before launch (needs owner)
 
 - [ ] Real photos and a short install video to replace stock images (hero frame, about, service cards)
-- [ ] Vector or high-res logo (current logo is the 192px favicon from the old site)
-- [ ] Confirm film brands and film tiers offered (`site.brands`, automotive page "Film Options")
-- [ ] Confirm warranty wording
-- [ ] Confirm response window promise (`site.responseWindow`, currently "2 business hours")
+- [x] Logo (wordmark received)
+- [ ] Brand logo files (owner will send; drop in `public/brands/`) and confirm film tiers on automotive page
+- [x] Warranty: lifetime against fading, peeling, bubbling, adhesive failure
+- [x] Response promise: no timed promise ("as soon as we can")
 - [ ] Public email address, if he wants one shown
-- [ ] Confirm services: vinyl/decals, safety film, windshield film, house calls for commercial
-- [ ] Review About page story (year opened, details)
+- [ ] Confirm safety film, windshield film, house calls for commercial (chrome deletes + accent wraps added, no full color change)
+- [ ] Owner to edit About story (draft in place)
 - [ ] Review Privacy Policy and Terms
 - [ ] Lead notification email in Netlify Forms
 - [ ] Point thetinthouse.net DNS to the new host, then update Google Business Profile website link

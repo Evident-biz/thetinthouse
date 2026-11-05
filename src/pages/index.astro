@@ -43,7 +43,7 @@ const benefits = [
           <ul class="hero__chips">
             <li>Walk-ins welcome</li>
             <li>Most cars done in 2-3 hours</li>
-            <li>Warranty on every install</li>
+            <li>Lifetime warranty</li>
             <li>Financing with Affirm</li>
           </ul>
           <div class="btn-row">
@@ -119,11 +119,12 @@ const benefits = [
         <h2>About <span class="accent">The Tint House</span></h2>
         <hr class="rule" />
         <p class="lead">We started out of a garage at home, tinting cars for friends and family. Word got around, and today The Tint House is a full shop on Las Palmas Ave in Patterson.</p>
+        <p>We take your vision for your car, home or storefront and bring it to life with window tint, vinyl and decals, and real craftsmanship.</p>
         <p>Customers keep coming back for the same reasons: honest advice, fair prices and clean work. We walk you through your options, show you real samples of each shade, and never push you into film you don't need.</p>
         <div class="about__boxes">
           <div>
             <h3>Our Commitment</h3>
-            <p>Quality film, careful installs and a warranty on every job. If something isn't right, we make it right.</p>
+            <p>Quality film, careful installs and a lifetime warranty against fading, peeling, bubbling and adhesive failure.</p>
           </div>
           <div>
             <h3>Owner on Site</h3>
@@ -184,10 +185,10 @@ const benefits = [
   <!-- 11. Brands -->
   <section class="brands">
     <div class="wrap center">
-      <h2>Premium Films <span class="accent">We Install</span></h2>
+      <h2>Proven Products, <span class="accent">Trusted Services</span></h2>
     </div>
     <div class="brands__row wrap">
-      {site.brands.map((b) => <span>{b}</span>)}
+      {site.brands.map((b) => b.logo ? <img src={`/brands/${b.logo}`} alt={b.name} loading="lazy" /> : <span>{b.name}</span>)}
     </div>
   </section>
 
@@ -233,7 +234,7 @@ const benefits = [
   .financing .btn--orange { background: var(--black); color: var(--white); }
   .financing__fine { font-size: .9rem; margin-top: 18px; }
 
-  .flips { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .flips { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   .flip { perspective: 1200px; height: 360px; border-radius: var(--radius); outline-offset: 4px; }
   .flip__inner { position: relative; width: 100%; height: 100%; transition: transform .6s; transform-style: preserve-3d; }
   .flip.is-flipped .flip__inner { transform: rotateY(180deg); }
@@ -273,6 +274,7 @@ const benefits = [
   .brands { background: var(--black); color: var(--white); padding: 56px 0 64px; }
   .brands h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
   .brands__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 18px; }
+  .brands__row img { height: 56px; width: auto; background: var(--white); border-radius: 12px; padding: 8px 14px; }
   .brands__row span { font: 700 1.6rem var(--display); text-transform: uppercase; padding: 14px 28px; border: 1px solid #333; border-radius: 999px; color: #e5e5e5; }
 
   .posts { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }

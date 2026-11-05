@@ -48,7 +48,7 @@ const { compact = false, id = 'quote' } = Astro.props;
   <label class="consent"><input type="checkbox" name="sms_consent" value="yes" /> It's OK to text me about my quote. Msg &amp; data rates may apply. Reply STOP to opt out.</label>
 
   <button class="btn btn--orange qform__submit" type="submit">Request My Free Quote</button>
-  <p class="qform__promise">We'll call or text you back within {site.responseWindow} during shop hours. Prefer to talk now? <a href={site.phoneHref}>Call {site.phone}</a></p>
+  <p class="qform__promise">{site.responsePromise} Prefer to talk now? <a href={site.phoneHref}>Call {site.phone}</a></p>
 </form>
 
 <style>

@@ -7,7 +7,7 @@ import { site } from '../data/site';
     <div class="wrap">
       <p class="eyebrow-line">Request received</p>
       <h1>Got it. <span class="accent">Thank you!</span></h1>
-      <p class="lead" id="msg">We'll call or text you back within {site.responseWindow} during shop hours.</p>
+      <p class="lead" id="msg">{site.responsePromise}</p>
       <p>Need us sooner? Give us a call.</p>
       <div class="btn-row">
         <a class="btn btn--orange" href={site.phoneHref}>Call {site.phone}</a>

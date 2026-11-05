@@ -23,14 +23,28 @@ export const site = {
   ],
   // schema.org openingHours format
   openingHours: ['Tu-Sa 09:00-17:00'],
-  responseWindow: '2 business hours', // TODO: owner to confirm what he can keep
+  // Owner: "We will call as soon as a representative is available." No timed promise.
+  responsePromise: "We'll call or text you back as soon as we're off the tint table. If we're mid-install, give us a little time.",
+  warranty: 'Lifetime warranty against fading, peeling, bubbling and adhesive failure.',
   rating: { value: '5.0', count: 248 },
   reviewsUrl: 'https://business.google.com/v/the-tint-house/0238381919970204506/c94d/_/rev',
   writeReviewUrl: 'https://business.google.com/v/the-tint-house/0238381919970204506/c94d/_/rev',
   instagram: 'https://www.instagram.com/thetinthouse_209/',
   facebook: 'https://www.facebook.com/thetinthouse/',
   awards: ['Best of 209 2024', 'Best of 209 2025'],
-  brands: ['3M', 'Geoshield', 'Hitek Films', 'Union', 'Computer Cut'], // TODO: owner to confirm
+  // Owner rotates 2-3 film brands at a time. Drop a logo file in public/brands/ and set `logo` to show it.
+  brands: [
+    { name: '3M', logo: '' },
+    { name: 'Ultrafit', logo: '' },
+    { name: 'GCC', logo: '' },
+    { name: 'Tint Club', logo: '' },
+    { name: 'Geoshield', logo: '' },
+    { name: 'Hitek', logo: '' },
+    { name: 'Union Window Films', logo: '' },
+    { name: 'Azteca 525 Printing', logo: '' },
+    { name: '3D Professional Detailing', logo: '' },
+    { name: 'Evident Business Solutions', logo: '' },
+  ],
   serviceArea: ['Patterson', 'Modesto', 'Turlock', 'Tracy', 'Manteca', 'Newman', 'Crows Landing', 'Westley'],
 };
 
@@ -65,6 +79,13 @@ export const services = [
     title: 'Windshield & Sun Strip',
     short: 'Clear heat-rejecting windshield film and a legal sun strip up top. Big difference on Valley summer drives.',
     image: 'view-through-car-window',
+  },
+  {
+    slug: 'automotive-window-tint',
+    anchor: '#wraps',
+    title: 'Chrome Delete & Accent Wraps',
+    short: 'Black out chrome trim and wrap hoods, roofs, mirrors and more. Accent wraps only, no full color changes.',
+    image: 'sports-car-wheel',
   },
   {
     slug: 'residential-window-film',
